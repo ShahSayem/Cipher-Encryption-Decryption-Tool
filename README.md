@@ -105,7 +105,7 @@ You can add more dependencies later if needed for file support or zip compressio
 
 ## 📜 License
 
-This project is open-source and for educational purposes. Use it to learn or expand on encryption, Streamlit apps, and secure key handling.
+This project is licensed under the MIT License.
 
 ---
 
