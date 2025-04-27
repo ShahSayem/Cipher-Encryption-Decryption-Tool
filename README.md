@@ -118,5 +118,5 @@ This project is licensed under the MIT License.
 ---
 
 ## 🌐 Links
-🔗 [Cipher Encryption-Decryption Tool on Streamlit](https://ciphertool.streamlit.app/)
+🔗 [Cipher Encryption-Decryption Tool](https://ciphertool.streamlit.app/)
 🔗 [GitHub Repository](https://github.com/ShahSayem/Cipher-Encryption-Decryption-Tool)
