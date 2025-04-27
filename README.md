@@ -1,34 +1,36 @@
-# 🔐 Vernam Cipher - Streamlit Encryption Tool
+# 🔐 Cipher Encryption-Decryption Tool
 
-A secure, character-based encryption/decryption tool built with **Streamlit**, implementing the **Vernam Cipher (One-Time Pad)** with added features like:
+A secure, user-friendly encryption and decryption tool built with **Streamlit**, implementing classic ciphers:
 
-- ✅ Custom CHARSET for maximum character support
-- ✅ Base64 encoding for safe storage and sharing
-- ✅ Key generation, encryption, and decryption with validation
-- ✅ User-friendly interface for text operations
+- ✅ **Vernam Cipher**
+- ✅ **Rail Fence Cipher**
+- ✅ **Caesar Cipher**
+
+All enhanced with validation, Base64 encoding where needed, and a clean modern UI.
 
 ---
 
 ## 🌐 Live Demo
 
-🔗 [vernamcipher.streamlit.app](https://vernamcipher.streamlit.app/)
+🔗 [ciphertool.streamlit.app](https://ciphertool.streamlit.app/)
 
 ---
 
 ## 🚀 Features
 
-- 🔤 Encrypt & decrypt **text** securely using a random key
-- 🔑 Automatically generates a secure key of the same length
-- 🔐 Uses a stable and extended character set to support special symbols, punctuation, whitespace, and control characters
-- 🧼 Filters out unsupported characters and warns users
-- 📦 Base64 encodes both ciphertext and key for sharing
+- 🔤 Encrypt & decrypt **text** securely with multiple ciphers
+- 🔑 Auto key generation (Vernam)
+- 🧼 Filters out unsupported characters (Vernam)
+- 📦 Base64 encoding/decoding for Vernam Cipher
+- 🎛️ Adjustable parameters (like rails for Rail Fence and shift for Caesar)
 - 💥 Full validation with informative error messages
+- 🎨 Interactive, mobile-friendly Streamlit UI
 
 ---
 
-## 🧩 Character Set
+## 🧩 Character Set (Vernam Cipher)
 
-The app supports a wide range of characters via a custom `CHARSET` defined as a **list** (not string) for safe index handling:
+The app supports a wide range of characters for Vernam encryption using a custom CHARSET:
 
 ```python
 CHARSET = list(
@@ -39,12 +41,12 @@ CHARSET = list(
 )
 ```
 
-✅ This includes:
-
-- Letters and digits
-- All standard punctuation
-- Whitespace: spaces, tabs, newlines
-- Control character: `\r` (carriage return)
+✅ Includes:
+- Letters (A-Z, a-z)
+- Digits (0-9)
+- Standard punctuation
+- Whitespace: space, tab, newline
+- Carriage return (`\r`)
 
 ---
 
@@ -54,32 +56,33 @@ CHARSET = list(
 
 ```bash
 # Clone the repository
-git clone https://github.com/ShahSayem/Vernam-Cipher-Encryption-Decryption-Tool.git
-cd Vernam-Cipher-Encryption-Decryption-Tool
+git clone https://github.com/ShahSayem/Cipher-Encryption-Decryption-Tool.git
+cd Cipher-Encryption-Decryption-Tool
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Run the app
-streamlit run vernam_cipher.py
+streamlit run cipher_tool.py
 ```
 
-### 🧑‍💻 From the UI:
+### 🧑‍💻 Using the UI:
 
-1. Select **Encrypt Text** or **Decrypt Text** from the sidebar
-2. Enter text or Base64 content
-3. View encrypted/decrypted result
-4. Copy key and result using Streamlit's copy-friendly layout
+1. Select your cipher (Vernam, Rail Fence, Caesar) from sidebar
+2. Choose **Encrypt** or **Decrypt**
+3. Enter the required input
+4. View encrypted/decrypted result
+5. Copy output easily with Streamlit's built-in copy functionality
 
 ---
 
 ## 📁 File Structure
 
 ```
-vernam-cipher-streamlit/
-├── vernam_cipher.py       # Main Streamlit application
-├── requirements.txt       # Python dependencies
-├── README.md              # Project documentation
+Cipher-Encryption-Decryption-Tool/
+├── cipher_tool.py        # Main Streamlit application
+├── requirements.txt      # Python dependencies
+├── README.md             # Project documentation
 ```
 
 ---
@@ -89,8 +92,6 @@ vernam-cipher-streamlit/
 ```
 streamlit>=1.30.0
 ```
-
-You can add more dependencies later if needed for file support or zip compression.
 
 ---
 
@@ -110,7 +111,12 @@ This project is licensed under the MIT License.
 ---
 
 ## ✨ Developed by
+**[Shah Sayem Ahmad](https://shahsayem.netlify.app/)** 
+**[Md Mahmud Hossain Ferdous](https://www.linkedin.com/in/ferdousmh/)** 
+**[Hasan Ahmad](https://www.linkedin.com/in/hasan-ahmad-502391204/)** 
 
-**Shah Sayem Ahmad**\
-🔗 [vernamcipher.streamlit.app](https://vernamcipher.streamlit.app/)
+---
 
+## 🌐 Links
+🔗 [Cipher Encryption-Decryption Tool on Streamlit](https://ciphertool.streamlit.app/)
+🔗 [GitHub Repository](https://github.com/ShahSayem/Cipher-Encryption-Decryption-Tool)
