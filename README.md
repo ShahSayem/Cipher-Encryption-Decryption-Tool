@@ -151,5 +151,6 @@ This project is licensed under the **MIT License**.
 
 ## 🌐 Links
 
-🔗 [Cipher Encryption-Decryption Tool](https://ciphertool.streamlit.app/)
-🔗 [GitHub Repository](https://github.com/ShahSayem/Cipher-Encryption-Decryption-Tool)
+* 🔗 [Cipher Encryption-Decryption Tool](https://ciphertool.streamlit.app/)
+* 🔗 [GitHub Repository](https://github.com/ShahSayem/Cipher-Encryption-Decryption-Tool)
+* 🔗 [GitHub Repository for Flutter app](https://github.com/MHFerdous/Crypto-Project)
