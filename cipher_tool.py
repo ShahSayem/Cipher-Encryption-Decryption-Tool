@@ -168,7 +168,7 @@ cipher_choice = st.sidebar.radio("Choose a Cipher", ["Vernam Cipher", "Rail Fenc
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Made with ❤️")
-st.sidebar.caption("by Ferdous, Hasan & Sayem")
+st.sidebar.caption("by Ferdous, Nadim, Hasan & Sayem")
 
 st.divider()
 
