@@ -1,6 +1,7 @@
 import base64
 import secrets
 import streamlit as st
+import numpy as np
 
 # -----------------------------------
 # Charset and Helper Functions
@@ -9,8 +10,10 @@ CHARSET = list(
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     "abcdefghijklmnopqrstuvwxyz"
     "0123456789"
-    " !@#$%^&*()-_=+[]{}|;:'\",.<>?/\\`~\n\t\r"
+    "!@#$%^&*()-_=+[]{}|;:'\",.<>?/\\`~\n\t\r"
 )
+
+ALPHABET = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 if len(CHARSET) != len(set(CHARSET)):
     st.error("❌ CHARSET has duplicate characters!")
@@ -26,7 +29,7 @@ def char_to_index(c):
     return CHARSET.index(c)
 
 def index_to_char(i):
-    return CHARSET[i]
+    return CHARSET[i % len(CHARSET)]
 
 def generate_key(length):
     return ''.join(secrets.choice(CHARSET) for _ in range(length))
@@ -75,7 +78,7 @@ def decrypt_rail_fence(cipher, key):
     index = 0
     rows = []
     for count in row_counts:
-        rows.append(list(cipher[index:index+count]))
+        rows.append(list(cipher[index:index + count]))
         index += count
     result, row_indices = [], [0] * key
     for r in pattern:
@@ -87,31 +90,85 @@ def caesar_encrypt(text, shift):
     result = ''
     for char in text:
         ascii_code = ord(char)
-        if 32 <= ascii_code <= 126:  # Printable ASCII range
+        if 32 <= ascii_code <= 126:
             shifted = (ascii_code - 32 + shift) % 95 + 32
             result += chr(shifted)
         else:
-            result += char  # Leave non-printable characters (like \n) unchanged
+            result += char
     return result
 
 def caesar_decrypt(cipher, shift):
     return caesar_encrypt(cipher, -shift % 95)
 
+# -----------------------------------
+# Hill Cipher Functions
+# -----------------------------------
+
+def text_to_numbers(text, charset):
+    return [charset.index(c) for c in text]
+
+def numbers_to_text(numbers, charset):
+    return ''.join(charset[n % len(charset)] for n in numbers)
+
+def matrix_mod_inv(matrix, modulus):
+    n = matrix.shape[0]
+    det = int(round(np.linalg.det(matrix))) % modulus
+    if np.gcd(det, modulus) != 1:
+        raise ValueError("Matrix determinant is not invertible modulo charset length.")
+    det_inv = pow(det, -1, modulus)
+
+    if n == 2:
+        a, b, c, d = matrix.flatten()
+        adj = np.array([[d, -b], [-c, a]])
+    elif n == 3:
+        adj = np.zeros((3, 3), dtype=int)
+        for r in range(3):
+            for c in range(3):
+                minor = np.delete(np.delete(matrix, r, axis=0), c, axis=1)
+                sign = (-1) ** (r + c)
+                adj[c][r] = sign * int(round(np.linalg.det(minor)))  # note transpose
+    else:
+        raise ValueError("Only 2x2 and 3x3 matrices are supported.")
+
+    return (det_inv * adj) % modulus
+
+def hill_process(text, key_text, mode, size, charset):
+    modulus = len(charset)
+    if charset == ALPHABET:
+        text = text.upper()
+        key_text = key_text.upper()
+    text = ''.join(c for c in text if c in charset)
+    n = size
+    key_nums = text_to_numbers(key_text, charset)
+    if len(key_nums) != n * n:
+        raise ValueError("Key must form a square matrix.")
+    key_matrix = np.array(key_nums).reshape(n, n)
+    if len(text) % n != 0:
+        text += charset[0] * (n - len(text) % n)
+    chunks = [text[i:i + n] for i in range(0, len(text), n)]
+    result = ''
+    if mode == 'decrypt':
+        key_matrix = matrix_mod_inv(key_matrix, modulus)
+    for chunk in chunks:
+        vec = np.array(text_to_numbers(chunk, charset)).reshape(n, 1)
+        res = np.dot(key_matrix, vec) % modulus
+        result += numbers_to_text(res.flatten(), charset)
+    return result
 
 # -----------------------------------
 # Streamlit UI
 # -----------------------------------
 
-st.set_page_config(page_title="🔐 Cipher Tools", layout="wide")
+#st.set_page_config(page_title="🔐 Cipher Tools", layout="wide")
 st.title("🔐 Cipher Tools :")
 st.caption("Encrypt and decrypt your text using classic ciphers!")
 
-st.sidebar.title("🔄 Navigation")
-cipher_choice = st.sidebar.radio("Choose a Cipher", ["Vernam Cipher", "Rail Fence Cipher", "Caesar Cipher"])
+st.sidebar.title("Choose a Cipher")
+cipher_choice = st.sidebar.radio("", ["Vernam Cipher", "Rail Fence Cipher", "Caesar Cipher", "Hill Cipher"])
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Made with ❤️")
-st.sidebar.caption("by Ferdous, Nadim, Hasan & Sayem")
+st.sidebar.caption("Made with ❤️ by")
+st.sidebar.caption("Ferdous, Nadim, Hasan & Sayem")
 
 st.divider()
 
@@ -191,6 +248,29 @@ elif cipher_choice == "Caesar Cipher":
             plaintext = caesar_decrypt(ciphertext, shift)
             st.success("Decryption Successful!")
             st.code(plaintext, "text")
+
+elif cipher_choice == "Hill Cipher":
+    st.header("🔺 Hill Cipher")
+
+    section = st.selectbox("Choose Type", ["Classic Hill Cipher (A-Z only)", "Modern Hill Cipher (95-char set)"])
+    action = st.radio("Action", ["Encrypt", "Decrypt"], horizontal=True)
+    matrix_type = st.selectbox("Matrix Size", ["2x2", "3x3"])
+    key_text = st.text_input("Enter Key Text")
+
+    text = st.text_area("Enter Text")
+
+    button_label = "🔒 Encrypt" if action == "Encrypt" else "🔓 Decrypt"
+
+    if st.button(button_label) and text and key_text:
+        try:
+            mode = 'encrypt' if action == "Encrypt" else 'decrypt'
+            size = 2 if matrix_type == "2x2" else 3
+            charset = ALPHABET if "Classic" in section else CHARSET
+            result = hill_process(text, key_text, mode, size, charset)
+            st.success(f"{action}ion Successful!")
+            st.code(result, "text")
+        except Exception as e:
+            st.error(f"Error: {str(e)}")
 
 st.divider()
 st.caption("🍀 Secure your message with style!")
