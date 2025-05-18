@@ -1,13 +1,13 @@
 # 🔐 Cipher Encryption-Decryption Tool
 
-A secure, user-friendly encryption and decryption tool built with **Streamlit**, implementing classic ciphers:
+A secure, interactive encryption and decryption tool built with **Streamlit**, implementing multiple classic cryptographic techniques:
 
-- ✅ **Vernam Cipher**
-- ✅ **Rail Fence Cipher**
-- ✅ **Caesar Cipher**
-- ✅ **Hill Cipher**
+* ✅ **Vernam Cipher** (One-Time Pad)
+* ✅ **Rail Fence Cipher** (Transposition Cipher)
+* ✅ **Caesar Cipher** (Substitution Cipher)
+* ✅ **Hill Cipher** (Classic & Modern variants)
 
-All enhanced with validation, Base64 encoding where needed, and a clean modern UI.
+All ciphers are implemented with secure handling, validation, dynamic key generation (where applicable), and clean UI features for usability.
 
 ---
 
@@ -19,35 +19,62 @@ All enhanced with validation, Base64 encoding where needed, and a clean modern U
 
 ## 🚀 Features
 
-- 🔤 Encrypt & decrypt **text** securely with multiple ciphers
-- 🔑 Auto key generation (Vernam)
-- 🧼 Filters out unsupported characters (Vernam)
-- 📦 Base64 encoding/decoding for Vernam Cipher
-- 🎛️ Adjustable parameters (like rails for Rail Fence and shift for Caesar)
-- 💥 Full validation with informative error messages
-- 🎨 Interactive, mobile-friendly Streamlit UI
+* 🔤 Encrypt & decrypt **text** securely using four classical ciphers
+* 🧠 Supports both **simple and matrix-based encryption schemes**
+* 🔑 **Auto key generation** for Vernam Cipher
+* 📦 **Base64 encoding** (used for key and ciphertext in Vernam)
+* 🧼 Filters unsupported characters (Vernam)
+* 🧮 Customizable shift and key values (Caesar, Hill)
+* 🎛️ Configurable parameters: number of rails (Rail Fence), matrix size and alphabet (Hill)
+* 📲 Mobile-friendly, interactive Streamlit UI
+* 🧾 Informative feedback and input validation
 
 ---
 
-## 🧩 Character Set (Vernam Cipher)
-
-The app supports a wide range of characters for Vernam encryption using a custom CHARSET:
+## 🔠 Character Set (for Vernam & Modern Hill)
 
 ```python
 CHARSET = list(
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     "abcdefghijklmnopqrstuvwxyz"
     "0123456789"
-    " !@#$%^&*()-_=+[]{}|;:'\"",.<>?/\\`~\n\t\r"
+    "!@#$%^&*()-_=+[]{}|;:'\"",.<>?/\\`~\n\t\r"
 )
 ```
 
 ✅ Includes:
-- Letters (A-Z, a-z)
-- Digits (0-9)
-- Standard punctuation
-- Whitespace: space, tab, newline
-- Carriage return (`\r`)
+
+* Uppercase & lowercase letters
+* Digits 0–9
+* Punctuation/symbols
+* Whitespace: space, tab (`\t`), newline (`\n`), carriage return (`\r`)
+
+---
+
+## 🛠️ Ciphers Overview
+
+### 🔐 Vernam Cipher
+
+* Character-level encryption using one-time pad
+* Uses same-length key (auto-generated)
+* Output is Base64 encoded for safe sharing
+
+### 🚉 Rail Fence Cipher
+
+* Rearranges characters based on zig-zag pattern
+* Requires number of rails (≥2)
+
+### 🍀 Caesar Cipher
+
+* Each character is shifted by a fixed integer value
+* Printable ASCII (from space to `~`) is supported
+
+### 🔺 Hill Cipher
+
+* Matrix-based cipher using 2x2 or 3x3 key matrix
+* Supports **Classic (A–Z)** and **Modern (full charset)** versions
+* Key must match matrix dimensions (length 4 for 2x2, 9 for 3x3)
+* Includes matrix inversion modulo `len(charset)` for decryption
 
 ---
 
@@ -67,13 +94,13 @@ pip install -r requirements.txt
 streamlit run cipher_tool.py
 ```
 
-### 🧑‍💻 Using the UI:
+### 🧑‍💻 From the UI:
 
-1. Select your cipher (Vernam, Rail Fence, Caesar) from sidebar
-2. Choose **Encrypt** or **Decrypt**
-3. Enter the required input
-4. View encrypted/decrypted result
-5. Copy output easily with Streamlit's built-in copy functionality
+1. Choose a cipher from the sidebar
+2. Select Encrypt or Decrypt
+3. Provide plaintext/ciphertext and optional key or settings
+4. Press the action button
+5. See the result and copy from the output box
 
 ---
 
@@ -92,33 +119,37 @@ Cipher-Encryption-Decryption-Tool/
 
 ```
 streamlit>=1.30.0
+numpy>=1.24.0
 ```
 
 ---
 
-## 📌 To Improve or Extend
+## 📌 Potential Improvements
 
-- ✅ Add file encryption support
-- ✅ Package encrypted file + key into a `.zip`
-- 🔐 Add password protection
-- 🧾 Add support for Unicode or emojis via UTF-8 byte handling
+* 📂 Add file upload & encryption support
+* 🔐 Secure `.zip` packaging of encrypted message & key
+* 🌍 Add UTF-8 support for full Unicode and emoji handling
+* 🚀 Dockerfile for local containerized deployment
+* 💡 Add dynamic cipher comparison or visualization
 
 ---
 
 ## 📜 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
 ---
 
 ## ✨ Developed by
-- **[Shah Sayem Ahmad](https://shahsayem.netlify.app/)** 
-- **[Md Mahmud Hossain Ferdous](https://www.linkedin.com/in/ferdousmh/)** 
-- **[Hasan Ahmad](https://www.linkedin.com/in/hasan-ahmad-502391204/)** 
-- **[Muhammad Nadim](https://www.linkedin.com/in/muhammad-nadim-183b2921a/)** 
+
+* **[Shah Sayem Ahmad](https://shahsayem.netlify.app/)**
+* **[Md Mahmud Hossain Ferdous](https://www.linkedin.com/in/ferdousmh/)**
+* **[Hasan Ahmad](https://www.linkedin.com/in/hasan-ahmad-502391204/)**
+* **[Muhammad Nadim](https://www.linkedin.com/in/muhammad-nadim-183b2921a/)**
 
 ---
 
 ## 🌐 Links
-🔗 [Cipher Encryption-Decryption Tool](https://ciphertool.streamlit.app/)
+
+🔗 [Streamlit App](https://ciphertool.streamlit.app/)
 🔗 [GitHub Repository](https://github.com/ShahSayem/Cipher-Encryption-Decryption-Tool)
