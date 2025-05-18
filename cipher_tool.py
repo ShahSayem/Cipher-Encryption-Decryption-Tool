@@ -164,11 +164,11 @@ st.title("🔐 Cipher Tools :")
 st.caption("Encrypt and decrypt your text using classic ciphers!")
 
 st.sidebar.title("🔄 Navigation")
-cipher_choice = st.sidebar.radio("Choose a Cipher", ["Vernam Cipher", "Rail Fence Cipher", "Caesar Cipher", "Hill Cipher"])
+cipher_choice = st.sidebar.radio("Choose a Cipher", ["Rail Fence Cipher", "Hill Cipher",  "Caesar Cipher", "Vernam Cipher"])
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Made with ❤️")
-st.sidebar.caption("by Ferdous, Nadim, Hasan & Sayem")
+st.sidebar.caption("Made with ❤️ by")
+st.sidebar.caption("Ferdous, Nadim, Hasan & Sayem")
 
 st.divider()
 
