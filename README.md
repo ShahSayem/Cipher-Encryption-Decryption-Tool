@@ -5,6 +5,7 @@ A secure, user-friendly encryption and decryption tool built with **Streamlit**,
 - ✅ **Vernam Cipher**
 - ✅ **Rail Fence Cipher**
 - ✅ **Caesar Cipher**
+- ✅ **Hill Cipher**
 
 All enhanced with validation, Base64 encoding where needed, and a clean modern UI.
 
@@ -114,6 +115,7 @@ This project is licensed under the MIT License.
 **[Shah Sayem Ahmad](https://shahsayem.netlify.app/)** 
 **[Md Mahmud Hossain Ferdous](https://www.linkedin.com/in/ferdousmh/)** 
 **[Hasan Ahmad](https://www.linkedin.com/in/hasan-ahmad-502391204/)** 
+**[Muhammad Nadim](https://www.linkedin.com/in/muhammad-nadim-183b2921a/)** 
 
 ---
 
