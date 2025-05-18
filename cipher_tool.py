@@ -181,7 +181,7 @@ if cipher_choice == "Vernam Cipher":
         if st.button("🔒 Encrypt") and plaintext:
             cleaned_text, removed_chars = clean_unsupported(plaintext)
             if removed_chars:
-                st.warning(f"Removed unsupported characters: {removed_chars}")
+                st.warning(f"Removed unsupported characters!!!")
             if not cleaned_text:
                 st.error("Plaintext is empty after cleaning.")
             else:
@@ -189,6 +189,7 @@ if cipher_choice == "Vernam Cipher":
                 ciphertext = vernam_encrypt(cleaned_text, key)
                 st.success("Encryption Successful!")
                 with st.expander("🔐 View Encrypted Text & Key"):
+                    st.text("Encrypted Text:")
                     st.code(encode_base64(ciphertext), "text")
                     st.text("Generated Key:")
                     st.code(encode_base64(key), "text")
