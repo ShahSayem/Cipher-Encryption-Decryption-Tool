@@ -112,10 +112,10 @@ This project is licensed under the MIT License.
 ---
 
 ## ✨ Developed by
-**[Shah Sayem Ahmad](https://shahsayem.netlify.app/)** 
-**[Md Mahmud Hossain Ferdous](https://www.linkedin.com/in/ferdousmh/)** 
-**[Hasan Ahmad](https://www.linkedin.com/in/hasan-ahmad-502391204/)** 
-**[Muhammad Nadim](https://www.linkedin.com/in/muhammad-nadim-183b2921a/)** 
+- **[Shah Sayem Ahmad](https://shahsayem.netlify.app/)** 
+- **[Md Mahmud Hossain Ferdous](https://www.linkedin.com/in/ferdousmh/)** 
+- **[Hasan Ahmad](https://www.linkedin.com/in/hasan-ahmad-502391204/)** 
+- **[Muhammad Nadim](https://www.linkedin.com/in/muhammad-nadim-183b2921a/)** 
 
 ---
 
