@@ -114,7 +114,7 @@ def matrix_mod_inv(matrix, modulus):
     n = matrix.shape[0]
     det = int(round(np.linalg.det(matrix))) % modulus
     if np.gcd(det, modulus) != 1:
-        raise ValueError("Matrix determinant is not invertible modulo charset length.")
+        raise ValueError(f"Matrix determinant ({det}) is not invertible modulo {modulus}. Try with a different key!")
     det_inv = pow(det, -1, modulus)
 
     if n == 2:
