@@ -38,7 +38,7 @@ CHARSET = list(
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     "abcdefghijklmnopqrstuvwxyz"
     "0123456789"
-    "!@#$%^&*()-_=+[]{}|;:'\"",.<>?/\\`~\n\t\r"
+    " !@#$%^&*()-_=+[]{}|;:'\"",.<>?/\\`~\n\t\r"
 )
 ```
 
