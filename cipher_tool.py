@@ -180,8 +180,7 @@ if cipher_choice == "Vernam Cipher":
         plaintext = st.text_area("Enter Plaintext")
         if st.button("🔒 Encrypt") and plaintext:
             cleaned_text, removed_chars = clean_unsupported(plaintext)
-            if removed_chars:
-                st.warning(f"Removed unsupported characters!!!")
+
             if not cleaned_text:
                 st.error("Plaintext is empty after cleaning.")
             else:
