@@ -120,6 +120,7 @@ Cipher-Encryption-Decryption-Tool/
 ```
 streamlit>=1.30.0
 numpy>=1.24.0
+streamlit-navigation-bar
 ```
 
 ---
