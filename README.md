@@ -118,7 +118,7 @@ Cipher-Encryption-Decryption-Tool/
 ## 📦 `requirements.txt`
 
 ```
-streamlit>=1.30.0
+streamlit==1.35
 numpy>=1.24.0
 streamlit-navigation-bar
 ```
