@@ -13,6 +13,13 @@ CHARSET = list(
     " !@#$%^&*()-_=+[]{}|;:'\",.<>?/\\`~\n\t\r"
 )
 
+CHARSET2 = list(
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz"
+    "0123456789"
+    " !@#$%^&*()-_=+[]{}|;:'\",.<>?/\\`~"
+)
+
 ALPHABET = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 if len(CHARSET) != len(set(CHARSET)):
@@ -137,6 +144,14 @@ def hill_process(text, key_text, mode, size, charset):
     if charset == ALPHABET:
         text = text.upper()
         key_text = key_text.upper()
+
+    unsupported_text = [c for c in text if c not in charset]
+    unsupported_key = [c for c in key_text if c not in charset]
+    if unsupported_text or unsupported_key:
+        raise ValueError(
+            f"Unsupported characters detected in Text or Key!\n\n"
+            f"Allowed characters: 'A-Z' and 'a-z' for Classic Hill Cipher."
+        )    
     text = ''.join(c for c in text if c in charset)
     n = size
     key_nums = text_to_numbers(key_text, charset)
@@ -161,10 +176,10 @@ def hill_process(text, key_text, mode, size, charset):
 
 #st.set_page_config(page_title="🔐 Cipher Tools", layout="wide")
 st.title("🔐 Cipher Tools :")
-st.caption("Encrypt and decrypt your text using classic ciphers!")
+st.caption("Encrypt and decrypt your text using classic ciphers with a modern touch!")
 
 st.sidebar.title("🔄 Navigation")
-cipher_choice = st.sidebar.radio("Choose a Cipher", ["Rail Fence Cipher", "Hill Cipher",  "Caesar Cipher", "Vernam Cipher"])
+cipher_choice = st.sidebar.selectbox("Choose a Cipher", ["Rail Fence Cipher", "Hill Cipher",  "Caesar Cipher", "Vernam Cipher"])
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Made with ❤️ by")
@@ -256,9 +271,9 @@ elif cipher_choice == "Hill Cipher":
     section = st.selectbox("Choose Type", ["Classic Hill Cipher (A-Z only)", "Modern Hill Cipher (95-char set)"])
     action = st.radio("Action", ["Encrypt", "Decrypt"], horizontal=True)
     matrix_type = st.selectbox("Matrix Size", ["2x2", "3x3"])
-    key_text = st.text_input("Enter Key Text")
 
-    text = st.text_area("Enter Text")
+    text = st.text_area("Enter Plaintext" if action == "Encrypt" else "Enter Ciphertext")
+    key_text = st.text_input("Enter Key Text (4 characters)" if matrix_type=="2x2" else "Enter Key Text (9 characters)")
 
     button_label = "🔒 Encrypt" if action == "Encrypt" else "🔓 Decrypt"
 
@@ -266,7 +281,7 @@ elif cipher_choice == "Hill Cipher":
         try:
             mode = 'encrypt' if action == "Encrypt" else 'decrypt'
             size = 2 if matrix_type == "2x2" else 3
-            charset = ALPHABET if "Classic" in section else CHARSET
+            charset = ALPHABET if "Classic" in section else CHARSET2
             result = hill_process(text, key_text, mode, size, charset)
             st.success(f"{action}ion Successful!")
             st.code(result, "text")
