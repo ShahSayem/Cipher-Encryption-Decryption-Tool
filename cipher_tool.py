@@ -231,7 +231,7 @@ def hill_process(text, key_text, mode, size, charset):
 # Streamlit UI
 # -----------------------------------
 
-st.set_page_config(page_title="🔐 Cipher Tools", layout=""centered"")
+st.set_page_config(page_title="🔐 Cipher Tools", layout="centered")
 
 page = st_navbar(["Cipher Tools", "About Us"])
 if page == "About Us":
