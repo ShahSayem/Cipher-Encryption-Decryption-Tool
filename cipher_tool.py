@@ -332,10 +332,9 @@ else:
 
         section = st.selectbox("Choose Type", ["Classic Hill Cipher (A-Z only)", "Modern Hill Cipher (95-char set)"])
         action = st.radio("Action", ["Encrypt", "Decrypt"], horizontal=True)
-        matrix_type = st.selectbox("Matrix Size", ["2x2", "3x3"], key="hill_type")
         text = st.text_area("Enter Plaintext" if action == "Encrypt" else "Enter Ciphertext")
 
-        matrix_type = st.selectbox("Matrix Size", ["2x2", "3x3"], key="matrix_type")
+        matrix_type = st.selectbox("Matrix Size", ["2x2", "3x3"])
         key_text = st.text_input("Enter Key Text (4 characters)" if matrix_type=="2x2" else "Enter Key Text (9 characters)")
 
         button_label = "🔒 Encrypt" if action == "Encrypt" else "🔓 Decrypt"
