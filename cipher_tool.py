@@ -179,7 +179,7 @@ st.title("🔐 Cipher Tools :")
 st.caption("Encrypt and decrypt your text using classic ciphers with a modern touch!")
 
 st.sidebar.title("🔄 Navigation")
-cipher_choice = st.sidebar.selectbox("Choose a Cipher", ["Rail Fence Cipher", "Hill Cipher",  "Caesar Cipher", "Vernam Cipher"])
+cipher_choice = st.sidebar.radio("Choose a Cipher", ["Rail Fence Cipher", "Hill Cipher",  "Caesar Cipher", "Vernam Cipher"])
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Made with ❤️ by")
