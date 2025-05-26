@@ -201,13 +201,13 @@ def hill_process(text, key_text, mode, size, charset):
         text = text.upper()
         key_text = key_text.upper()
 
-    unsupported_text = [c for c in text if c not in charset]
-    unsupported_key = [c for c in key_text if c not in charset]
-    if unsupported_text or unsupported_key:
-        raise ValueError(
-            f"Unsupported characters detected in Text or Key!\n\n"
-            f"Allowed characters: 'A-Z' and 'a-z' for Classic Hill Cipher."
-        )    
+        unsupported_text = [c for c in text if c not in charset]
+        unsupported_key = [c for c in key_text if c not in charset]
+        if unsupported_text or unsupported_key:
+            raise ValueError(
+                f"Unsupported characters detected in Text or Key!\n\n"
+                f"Allowed characters: 'A-Z' and 'a-z' for Classic Hill Cipher."
+            )    
     text = ''.join(c for c in text if c in charset)
     
     n = size
