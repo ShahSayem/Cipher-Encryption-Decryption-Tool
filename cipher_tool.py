@@ -153,10 +153,11 @@ def hill_process(text, key_text, mode, size, charset):
             f"Allowed characters: 'A-Z' and 'a-z' for Classic Hill Cipher."
         )    
     text = ''.join(c for c in text if c in charset)
+    
     n = size
     key_nums = text_to_numbers(key_text, charset)
     if len(key_nums) != n * n:
-        raise ValueError("Key must form a square matrix.")
+        raise ValueError(f"Key must consist of {n*n} characters!")
     key_matrix = np.array(key_nums).reshape(n, n)
     if len(text) % n != 0:
         text += charset[0] * (n - len(text) % n)
