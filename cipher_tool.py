@@ -231,7 +231,7 @@ def hill_process(text, key_text, mode, size, charset):
 # Streamlit UI
 # -----------------------------------
 
-st.set_page_config(page_title="🔐 Cipher Tools", layout="centered")
+st.set_page_config(page_title="🔐 Cipher Tools", layout="wide")
 
 page = st_navbar(["Cipher Tools", "About Us"])
 if page == "About Us":
@@ -349,6 +349,10 @@ else:
                 st.code(result, "text")
             except Exception as e:
                 st.error(f"Error: {str(e)}")
+        else:
+            st.warning("Please fill in all fields before proceeding!")
+    else:
+        st.error("Invalid cipher choice!")
 
     st.divider()
     st.caption("🍀 Secure your message with style!")
